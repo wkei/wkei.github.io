@@ -1,31 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>...</title>
-  <style type="text/css">
-    body {
-      margin: 0;
-      color: #333;
-      background: #fefefe;
-      font-size: 12vw;
-      font-weight: 100;
-      font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      text-transform: uppercase;
-      white-space: pre-wrap;
-      -webkit-user-select: none;
-      user-select: none;
-      transition: color .3s, background .3s;
+
+<html lang="en">
+  <head>
+    <meta chatset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="I am Kei.">
+    <title>Kei.</title>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+  </head>
+  <body>
+   <div class="container">
+     <header class="header">
+        <h1 class="title">Kei.</h1>
+      </header>
+
+      <pre class="about">
+I am Kei,
+currently living in Kyoto,
+like taking photos and walking,
+write code when I put down my camera.</pre>
+
+      <nav class="nav">
+        <a class="link" href="https://www.instagram.com/kei.yw/" target="_blank" aria-label="Instagram"></a>
+        <a class="link" href="https://kei.darkroom.tech/" target="_blank" aria-label="Darkroom"></a>
+        <a class="link" href="https://twitter.com/kei_yq" target="_blank" aria-label="Twitter"></a>
+        <a class="link" href="http://github.com/wkei" target="_blank" aria-label="Github"></a>
+        <a class="link wip" aria-disabled="true" aria-label="Gallery (WIP)"></a>
+      </nav>
+   </div>
+
+   <script type="text/javascript">
+    function type(el, textList, timeout = 10) {
+      return new Promise(resolve => {
+        el.textContent = ""
+        el.timer = setInterval(() => {
+          el.textContent += textList.shift()
+          if (!textList.length) {
+            clearInterval(el.timer)
+            el.timer = undefined
+            resolve()
+          }
+        }, timeout)
+      })
     }
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #333;
-        color: #fefefe;
+
+    function typeMe() {
+      const about = document.querySelector(".about")
+      const textList = about.textContent.split("")
+      return type(about, textList)
+    }
+
+    function typeLink(link) {
+      const textList = link.getAttribute("aria-label").split("")
+      return type(link, textList, 20)
+    }
+    async function typeLinks() {
+      const links = document.querySelectorAll(".link")
+      for (let i = 0; i < links.length; i++) {
+        await typeLink(links[i])
       }
     }
-  </style>
-</head>
-<body>connecting
-the
-dots</body>
+    async function run() {
+      await typeMe()
+      await typeLinks()
+    }
+    run()
+   </script>
+  </body>
 </html>

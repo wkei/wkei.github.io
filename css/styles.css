@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;600&display=swap');
+
+:root {
+  --mono: Inconsolata, Monaco, Courier, monospace;
+}
+
+html {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: #222;
+  background: #f7f6f4;
+  box-sizing: border-box;
+}
+pre {
+  font-family: var(--mono);
+}
+body {
+  margin: 2em 2em 4em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+a {
+  color: #333;
+}
+
+.header {
+  margin: 3em 0;
+}
+.header .title {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.nav {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+}
+.nav .link + .link {
+  margin-top: 1.2em;
+}
+.link.wip {
+  text-decoration: none;
+  color: #888;
+  cursor: wait;
+}
+
+.about {
+  margin-bottom: 3em;
+  color: #555;
+  white-space: break-spaces;
+}
