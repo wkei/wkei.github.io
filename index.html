@@ -1,69 +1,87 @@
 
-<html lang="en">
+<html lang="en" >
   <head>
     <meta chatset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="I am Kei.">
-    <title>Kei.</title>
+    <title>慶・Kei</title>
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
   </head>
   <body>
-   <div class="container">
-     <header class="header">
-        <h1 class="title">Kei.</h1>
-      </header>
+    <h1 class="header">Kei</h1>
 
-      <pre class="about">
-I am Kei,
+    <pre class="about">I am Kei,
 currently living in Kyoto,
+working as a front-end dev,
 like taking photos and walking,
 write code when I put down my camera.</pre>
 
-      <nav class="nav">
-        <a class="link" href="https://www.instagram.com/kei.yw/" target="_blank" aria-label="Instagram"></a>
-        <a class="link" href="https://kei.darkroom.tech/" target="_blank" aria-label="Darkroom"></a>
-        <a class="link" href="https://twitter.com/kei_yq" target="_blank" aria-label="Twitter"></a>
-        <a class="link" href="http://github.com/wkei" target="_blank" aria-label="Github"></a>
-        <a class="link wip" aria-disabled="true" aria-label="Gallery (WIP)"></a>
-      </nav>
-   </div>
+    <nav class="nav">
+      <a class="link" href="https://www.instagram.com/kei.yw/" target="_blank" aria-label="Instagram"></a>
+      <a class="link" href="https://kei.darkroom.tech/" target="_blank" aria-label="Darkroom"></a>
+      <a class="link" href="https://twitter.com/kei_yq" target="_blank" aria-label="Twitter"></a>
+      <a class="link" href="http://github.com/wkei" target="_blank" aria-label="Github"></a>
+    </nav>
 
-   <script type="text/javascript">
-    function type(el, textList, timeout = 10) {
-      return new Promise(resolve => {
-        el.textContent = ""
-        el.timer = setInterval(() => {
-          el.textContent += textList.shift()
-          if (!textList.length) {
-            clearInterval(el.timer)
-            el.timer = undefined
-            resolve()
-          }
-        }, timeout)
-      })
-    }
+    <input type="checkbox" class="mode" />
 
-    function typeMe() {
-      const about = document.querySelector(".about")
-      const textList = about.textContent.split("")
-      return type(about, textList)
-    }
-
-    function typeLink(link) {
-      const textList = link.getAttribute("aria-label").split("")
-      return type(link, textList, 20)
-    }
-    async function typeLinks() {
-      const links = document.querySelectorAll(".link")
-      for (let i = 0; i < links.length; i++) {
-        await typeLink(links[i])
+    <script type="text/javascript">
+      function type(el, textList, timeout = 10) {
+        return new Promise(resolve => {
+          el.textContent = ""
+          el.timer = setInterval(() => {
+            el.textContent += textList.shift()
+            if (!textList.length) {
+              clearInterval(el.timer)
+              el.timer = undefined
+              resolve()
+            }
+          }, timeout)
+        })
       }
-    }
-    async function run() {
-      await typeMe()
-      await typeLinks()
-    }
-    run()
-   </script>
+
+      function typeMe() {
+        const about = document.querySelector(".about")
+        const textList = about.textContent.split("")
+        return type(about, textList)
+      }
+
+      function typeLink(link) {
+        const textList = link.getAttribute("aria-label").split("")
+        return type(link, textList, 20)
+      }
+      async function typeLinks() {
+        const links = document.querySelectorAll(".link")
+        for (let i = 0; i < links.length; i++) {
+          await typeLink(links[i])
+        }
+      }
+
+      async function run() {
+        await typeMe()
+        await typeLinks()
+      }
+      run()
+    </script>
+
+    <script type="text/javascript">
+      function changeMode(mode) {
+        document.documentElement.setAttribute("data-mode", mode)
+      }
+
+      function initModeSwitcher() {
+        const switcher = document.querySelector(".mode")
+        const darkMode = window.matchMedia("(prefers-color-scheme: dark)")
+
+        if (darkMode.matches) {
+          switcher.checked = true
+        }
+
+        switcher.addEventListener("input", (e) => {
+          e.target.checked ? changeMode("dark") : changeMode("light")
+        })
+      }
+      initModeSwitcher();
+    </script>
   </body>
 </html>
