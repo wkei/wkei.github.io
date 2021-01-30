@@ -3,65 +3,98 @@
   <head>
     <meta chatset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="I am Kei.">
-    <title>慶・Kei</title>
+    <meta name="description" content="Hi, I am Kei.">
+    <meta name="keywords" content="Frontend, JavaScript, HTML, CSS, TypeScript, React, Vue, Node.js, Camera, Photography, Analogue, Film, Hiking, Walking, Camping, Anime, Music">
+    <title>「慶・Kei」</title>
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
   </head>
   <body>
-    <h1 class="header">Kei</h1>
+    <h1 class="header">｢ <span></span> ｣</h1>
 
-    <pre class="about">I am Kei,
+    <pre class="about">Hi, I am Kei,
 currently living in Kyoto,
 working as a front-end dev,
 like taking photos and walking,
-write code when I put down my camera.</pre>
+write code when I put down my camera,
+looking for next job or next city in Japan.
+</pre>
 
     <nav class="nav">
       <a class="link" href="https://www.instagram.com/kei.yw/" target="_blank" aria-label="Instagram"></a>
       <a class="link" href="https://kei.darkroom.tech/" target="_blank" aria-label="Darkroom"></a>
       <a class="link" href="https://twitter.com/kei_yq" target="_blank" aria-label="Twitter"></a>
       <a class="link" href="http://github.com/wkei" target="_blank" aria-label="Github"></a>
+      <a class="link mail" href="mailto:yqkei@icloud.com" aria-label="yqkei@icloud.com"></a>
     </nav>
 
     <input type="checkbox" class="mode" />
 
     <script type="text/javascript">
-      function type(el, textList, timeout = 10) {
+      function type(el, text, timeout = 20) {
+        clearInterval(el.timer)
+        const list = text.split("")
         return new Promise(resolve => {
           el.textContent = ""
           el.timer = setInterval(() => {
-            el.textContent += textList.shift()
-            if (!textList.length) {
+            el.textContent += list.shift()
+            if (!list.length) {
               clearInterval(el.timer)
-              el.timer = undefined
+              delete el.timer
               resolve()
             }
           }, timeout)
         })
       }
 
-      function typeMe() {
-        const about = document.querySelector(".about")
-        const textList = about.textContent.split("")
-        return type(about, textList)
+      function erase(el, timeout = 20) {
+        return new Promise(resolve => {
+          clearInterval(el.timer)
+          el.timer = setInterval(() => {
+            el.textContent = el.textContent.slice(0, el.textContent.length - 1)
+            if (!el.textContent.length) {
+              clearInterval(el.timer)
+              delete el.timer
+              resolve()
+            }
+          }, timeout)
+        })
       }
 
-      function typeLink(link) {
-        const textList = link.getAttribute("aria-label").split("")
-        return type(link, textList, 20)
+      function typeAbout() {
+        const about = document.querySelector(".about")
+        return type(about, about.textContent)
       }
+
       async function typeLinks() {
         const links = document.querySelectorAll(".link")
         for (let i = 0; i < links.length; i++) {
-          await typeLink(links[i])
+          await type(links[i], links[i].getAttribute("aria-label"))
         }
       }
 
-      async function run() {
-        await typeMe()
-        await typeLinks()
+      async function typeKeyword(el, keywords, idx = 0) {
+        await type(el, keywords[idx], 80)
+        setTimeout(async () => {
+          await erase(el, 100) 
+          setTimeout(() => {
+            typeKeyword(el, keywords, idx + 1 >= keywords.length ? 0 : idx + 1)
+          }, 1000)
+        }, 1000)
       }
-      run()
+      function keywordAnime() {
+        const el = document.querySelector(".header span")
+        const keywords = document.querySelector("meta[name=keywords]")?.getAttribute("content")?.split(/\W*,\W*/)
+        setTimeout(() => {
+          typeKeyword(el, keywords.sort(() => Math.random() - 0.5))
+        }, 1000)
+      }
+
+      async function typeAnime() {
+        await typeAbout()
+        await typeLinks()
+        await keywordAnime()
+      }
+      typeAnime()
     </script>
 
     <script type="text/javascript">

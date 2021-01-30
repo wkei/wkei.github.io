@@ -49,6 +49,8 @@ html {
 }
 
 body {
+  display: flex;
+  flex-flow: column;
   height: 100%;
   margin: 0;
   padding: 2rem;
@@ -76,13 +78,18 @@ a:hover {
 }
 
 .nav {
+  flex: 1;
   display: flex;
   flex-flow: column;
   align-items: flex-start;
 }
-.nav a + a {
+.nav .link + .link {
   margin-top: 1rem;
 }
+.nav .link.mail  {
+  margin-top: auto;
+}
+
 
 .mode {
   -webkit-appearance: none;
