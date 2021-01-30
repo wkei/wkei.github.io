@@ -31,7 +31,7 @@ function erase(el, timeout = 20) {
 
 function typeAbout() {
   const about = document.querySelector(".about")
-  return type(about, about.textContent)
+  return type(about, about.textContent, 10)
 }
 
 async function typeLinks() {
