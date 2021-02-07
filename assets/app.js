@@ -34,6 +34,14 @@ function typeAbout() {
   return type(about, about.textContent, 10)
 }
 
+function prepareLinks() {
+  const links = document.querySelectorAll(".link")
+  for (let i = 0; i < links.length; i++) {
+    const l = links[i]
+    l.setAttribute("aria-label", l.textContent)
+    l.textContent = ""
+  }
+}
 async function typeLinks() {
   const links = document.querySelectorAll(".link")
   for (let i = 0; i < links.length; i++) {
@@ -59,6 +67,7 @@ function keywordAnime() {
 }
 
 async function typeAnime() {
+  prepareLinks()
   await typeAbout()
   await typeLinks()
   await keywordAnime()

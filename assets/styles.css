@@ -52,7 +52,7 @@ body {
   flex-flow: column;
   margin: 0;
   padding: 2rem;
-  height: inherit;
+  min-height: 100%;
 }
 pre {
   font-family: var(--mono);
@@ -80,25 +80,28 @@ a:hover {
   flex: 1;
   display: flex;
   flex-flow: column;
-  align-items: flex-start;
 }
-.nav .link + .link {
-  margin-top: 1rem;
+.nav .list {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
-.nav .link:nth-last-child(2) {
+.nav .item {
   margin-bottom: 1rem;
 }
-.nav .link:last-child  {
-  margin-top: auto;
+.nav .item:last-child  {
+  margin: auto 0 0;
 }
-
 
 .mode {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
   appearance: none;
-  position: absolute;
+  position: fixed;
   right: 2rem;
   bottom: 2rem;
   display: block;
