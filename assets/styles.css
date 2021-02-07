@@ -67,8 +67,8 @@ a:hover {
 
 
 .header {
-  margin: 3rem 0 4rem;
-  font-size: 2rem;
+  margin: 2rem 0 4rem;
+  font-size: 1.85rem;
 }
 
 .about {
@@ -85,7 +85,10 @@ a:hover {
 .nav .link + .link {
   margin-top: 1rem;
 }
-.nav .link.mail  {
+.nav .link:nth-last-child(2) {
+  margin-bottom: 1rem;
+}
+.nav .link:last-child  {
   margin-top: auto;
 }
 
