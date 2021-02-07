@@ -80,7 +80,7 @@ function changeMode(mode) {
 }
 
 function initModeSwitcher() {
-  const switcher = document.querySelector(".mode")
+  const switcher = document.querySelector(".trigger")
   const darkMode = window.matchMedia("(prefers-color-scheme: dark)")
 
   if (darkMode.matches) {

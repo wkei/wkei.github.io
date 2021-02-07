@@ -96,7 +96,10 @@ a:hover {
   margin: auto 0 0;
 }
 
-.mode {
+.mode-trigger {
+  font-size: 0;
+}
+.trigger {
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -117,6 +120,6 @@ a:hover {
   overflow: hidden;
   transition: box-shadow .2s;
 }
-.mode:checked {
+.trigger:checked {
   box-shadow: inset 9px -7px #f3d076;
 }
